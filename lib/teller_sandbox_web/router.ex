@@ -7,6 +7,9 @@ defmodule TellerSandboxWeb.Router do
 
   scope "/api", TellerSandboxWeb do
     pipe_through :api
+
+    resources "/accounts", AccountController, only: [:index, :show]
+    resources "/accounts/:account_id/transactions", TransactionController, only: [:index]
   end
 
   # Enables LiveDashboard only for development
