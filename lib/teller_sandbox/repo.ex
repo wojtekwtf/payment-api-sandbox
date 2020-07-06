@@ -17,7 +17,7 @@ defmodule TellerSandbox.Repo do
         name: "Test 🦁 account",
         routing_numbers: %RoutingNumbers{
             ach: "123456789",
-            wire: "124952590"
+            wire: "1234567890"
         },
         inflow: 1000,
         outflow: 100
@@ -127,9 +127,9 @@ defmodule TellerSandbox.Repo do
     |> Enum.map(fn _ -> %TellerSandbox.Transaction{
       type: "card_payment",
       running_balance: 1000,
-      id: "test_txn_1",
+      id: "test_txn_12345678",
       description: "test",
-      date: "",
+      date: "2020-07-07",
       amount: account.inflow,
       account_id: account.id
     } end)

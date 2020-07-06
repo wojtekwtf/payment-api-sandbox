@@ -16,7 +16,7 @@ defmodule TellerSandboxWeb.Factory do
       name: "Test account",
       routing_numbers: %RoutingNumbers{
           ach: "111111111",
-          wire: "111111111"
+          wire: "1111111111"
       },
       inflow: 1000,
       outflow: 100
