@@ -3,10 +3,6 @@ defmodule TellerSandbox.Repo do
     [
       %TellerSandbox.Account{
         account_number: "1234567891",
-        balances: %Balance{
-            available: 1234.56,
-            ledger: 1234.56
-        },
         currency_code: "USD",
         enrollment_id: "test_enr_2yzH_08f",
         id: "test_acc_F7lvd56V",
@@ -20,14 +16,11 @@ defmodule TellerSandbox.Repo do
             wire: "1234567890"
         },
         inflow: 1000,
-        outflow: 100
+        outflow: 100,
+        start_date: ~D[2020-07-01]
       },
       %TellerSandbox.Account{
         account_number: "1234567892",
-        balances: %Balance{
-            available: 100.00,
-            ledger: 100.0
-        },
         currency_code: "USD",
         enrollment_id: "test_enr_3zaI_19g",
         id: "test_acc_G8mwe67W",
@@ -41,14 +34,11 @@ defmodule TellerSandbox.Repo do
             wire: "2345678910"
         },
         inflow: 700,
-        outflow: 100
+        outflow: 100,
+        start_date: ~D[2020-06-01]
       },
       %TellerSandbox.Account{
         account_number: "1234567893",
-        balances: %Balance{
-            available: 2000.20,
-            ledger: 2000.20
-        },
         currency_code: "USD",
         enrollment_id: "test_enr_4abJ_20h",
         id: "test_acc_H9nxf78X",
@@ -62,14 +52,11 @@ defmodule TellerSandbox.Repo do
             wire: "3456789120"
         },
         inflow: 2100,
-        outflow: 300
+        outflow: 300,
+        start_date: ~D[2020-05-01]
       },
       %TellerSandbox.Account{
         account_number: "1234567894",
-        balances: %Balance{
-            available: 9000.01,
-            ledger: 9000.01
-        },
         currency_code: "USD",
         enrollment_id: "test_enr_5bcK_31i",
         id: "test_acc_I0myg89Y",
@@ -83,14 +70,11 @@ defmodule TellerSandbox.Repo do
             wire: "4567891230"
         },
         inflow: 8000,
-        outflow: 500
+        outflow: 500,
+        start_date: ~D[2020-04-01]
       },
       %TellerSandbox.Account{
         account_number: "1234567895",
-        balances: %Balance{
-            available: 420.69,
-            ledger: 420.69
-        },
         currency_code: "USD",
         enrollment_id: "test_enr_6cdL_42j",
         id: "test_acc_J1nzh90Z",
@@ -104,9 +88,11 @@ defmodule TellerSandbox.Repo do
             wire: "5678912340"
         },
         inflow: 6000,
-        outflow: 100
+        outflow: 100,
+        start_date: ~D[2020-03-01]
       },
     ]
+    |> Enum.map(fn account -> TellerSandbox.Account.set_balances(account) end)
   end
 
   def get_account_by_id(account_id) do
@@ -116,22 +102,8 @@ defmodule TellerSandbox.Repo do
 
   def get_account_transactions(account_id) do
     get_account_by_id(account_id)
-    |> generate_transactions()
+    |> TellerSandbox.Transaction.generate_transactions()
   end
 
-  defp generate_transactions(account) do
-    {:ok, start} = Date.new(2020, 6, 1)
-    days_since_start = Date.diff(Date.utc_today(), start)
 
-    1..days_since_start
-    |> Enum.map(fn _ -> %TellerSandbox.Transaction{
-      type: "card_payment",
-      running_balance: 1000,
-      id: "test_txn_12345678",
-      description: "test",
-      date: "2020-07-07",
-      amount: account.inflow,
-      account_id: account.id
-    } end)
-  end
 end

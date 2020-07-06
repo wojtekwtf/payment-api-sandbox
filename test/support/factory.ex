@@ -1,5 +1,5 @@
 defmodule TellerSandboxWeb.Factory do
-  def account_factory do
+  def account_factory(inflow \\ 600, outflow \\ 100, start_date \\ ~D[2020-06-06]) do # TODO improve the factory
     %TellerSandbox.Account{
       account_number: "1111111111",
       balances: %Balance{
@@ -18,9 +18,11 @@ defmodule TellerSandboxWeb.Factory do
           ach: "111111111",
           wire: "1111111111"
       },
-      inflow: 1000,
-      outflow: 100
+      inflow: inflow,
+      outflow: outflow,
+      start_date: start_date
     }
+    |> TellerSandbox.Account.set_balances()
   end
 
   def transaction_factory do

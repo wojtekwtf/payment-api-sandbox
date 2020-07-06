@@ -1,6 +1,22 @@
 defmodule Balance do
   @derive Jason.Encoder
   defstruct available: 0, ledger: 0
+
+  def get_account_balance(account, end_date \\ Date.utc_today()) do # TODO clarify
+    account_days = Date.diff(end_date, account.start_date)
+
+    inflow_days = div(account_days, 7)
+
+    total_outflow = (account_days-inflow_days)*account.outflow
+    total_inflow = inflow_days*account.inflow
+
+    balance = total_inflow-total_outflow
+
+    %Balance{
+      available: balance,
+      ledger: balance
+    }
+  end
 end
 
 defmodule Institution do
@@ -31,5 +47,10 @@ defmodule TellerSandbox.Account do
             name: "",
             routing_numbers: %RoutingNumbers{},
             inflow: 0,
-            outflow: 0
+            outflow: 0,
+            start_date: Date.utc_today()
+
+    def set_balances(account) do
+      %{account | balances: Balance.get_account_balance(account)}
+    end
 end
