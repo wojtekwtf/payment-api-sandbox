@@ -22,27 +22,39 @@ defmodule TellerSandbox.Transaction do
   end
 
   def create_transaction(day, account) do
+
+    amount = get_transaction_amount(day, account)
+    date = get_transaction_date(day, account)
+    running_balance = Balance.get_account_balance(account, date).available
+    txn_id = "test_txn_" <> get_txn_id()
+
+    %TellerSandbox.Transaction{
+      type: "card_payment",
+      running_balance: running_balance,
+      id: txn_id,
+      description: "test",
+      date: date,
+      amount: amount,
+      account_id: account.id
+    }
+  end
+
+  defp get_transaction_amount(day, account) do
     cond do
       rem(day, 7) == 0 ->
-        %TellerSandbox.Transaction{
-          type: "card_payment",
-          running_balance: 1000, # TODO
-          id: "test_txn_12345678", # TODO
-          description: "test",
-          date: "2020-07-07", # TODO
-          amount: account.inflow,
-          account_id: account.id
-        }
+        account.inflow
       true ->
-        %TellerSandbox.Transaction{
-          type: "card_payment",
-          running_balance: 1000, # TODO
-          id: "test_txn_12345678", # TODO
-          description: "test",
-          date: "2020-07-07", # TODO
-          amount: -account.outflow,
-          account_id: account.id
-        }
+        -account.outflow
     end
+  end
+
+  defp get_transaction_date(day, account) do
+    Date.add(account.start_date, day)
+  end
+
+  defp get_txn_id do
+    # Shameless copy paste from StackOverflow: https://stackoverflow.com/questions/32001606/how-to-generate-a-random-url-safe-string-with-elixir
+    # No uniqness quaranteed
+    :crypto.strong_rand_bytes(8) |> Base.url_encode64 |> binary_part(0, 8)
   end
 end

@@ -2,10 +2,6 @@ defmodule TellerSandboxWeb.Factory do
   def account_factory(inflow \\ 600, outflow \\ 100, start_date \\ ~D[2020-06-06]) do # TODO improve the factory
     %TellerSandbox.Account{
       account_number: "1111111111",
-      balances: %Balance{
-          available: 1111.11,
-          ledger: 1111.11
-      },
       currency_code: "USD",
       enrollment_id: "test_enr_11111111",
       id: "test_acc_11111111",
@@ -22,6 +18,10 @@ defmodule TellerSandboxWeb.Factory do
       outflow: outflow,
       start_date: start_date
     }
+  end
+
+  def account_factory_with_balance(inflow \\ 600, outflow \\ 100, start_date \\ ~D[2020-06-06]) do
+    account_factory(inflow, outflow, start_date)
     |> TellerSandbox.Account.set_balances()
   end
 

@@ -50,7 +50,7 @@ defmodule TellerSandbox.Account do
             outflow: 0,
             start_date: Date.utc_today()
 
-    def set_balances(account) do
-      %{account | balances: Balance.get_account_balance(account)}
+    def set_balances(account, end_date \\ Date.utc_today()) do
+      %{account | balances: Balance.get_account_balance(account, end_date)}
     end
 end
