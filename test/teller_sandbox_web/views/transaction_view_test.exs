@@ -14,5 +14,4 @@ defmodule TellerSandboxWeb.TransactionViewTest do
 
     assert rendered_transactions == transactions
   end
-
 end

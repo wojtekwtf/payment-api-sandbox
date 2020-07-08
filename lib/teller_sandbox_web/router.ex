@@ -49,7 +49,10 @@ defmodule TellerSandboxWeb.Router do
 
   defp send_403_forbidden_http_response(conn) do
     conn
-    |> Plug.Conn.resp(403, Jason.encode!(%{error_message: "You need an authorization token to run this request"}))
+    |> Plug.Conn.resp(
+      403,
+      Jason.encode!(%{error_message: "You need an authorization token to run this request"})
+    )
     |> Plug.Conn.put_resp_header("content-type", "application/json")
     |> Plug.Conn.send_resp()
     |> Plug.Conn.halt()

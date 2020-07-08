@@ -22,7 +22,6 @@ defmodule TellerSandboxWeb.TransactionControllerTest do
   end
 
   def validate_transaction_fields(object) do
-
     # TODO validate with regex
     assert String.length(object["type"]) > 0
     assert String.starts_with?(object["id"], "test_txn_")
@@ -31,6 +30,5 @@ defmodule TellerSandboxWeb.TransactionControllerTest do
     refute object["amount"] == 0
     assert String.starts_with?(object["account_id"], "test_acc_")
     assert String.length(object["account_id"]) == 17
-
   end
 end

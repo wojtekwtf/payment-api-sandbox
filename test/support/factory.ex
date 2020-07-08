@@ -1,18 +1,19 @@
 defmodule TellerSandboxWeb.Factory do
-  def account_factory(inflow \\ 600, outflow \\ 100, start_date \\ ~D[2020-06-06]) do # TODO improve the factory
+  # TODO improve the factory
+  def account_factory(inflow \\ 600, outflow \\ 100, start_date \\ ~D[2020-06-06]) do
     %TellerSandbox.Account{
       account_number: "1111111111",
       currency_code: "USD",
       enrollment_id: "test_enr_11111111",
       id: "test_acc_11111111",
       institution: %Institution{
-          id: "test_bank",
-          name: "The Test Bank"
+        id: "test_bank",
+        name: "The Test Bank"
       },
       name: "Test account",
       routing_numbers: %RoutingNumbers{
-          ach: "111111111",
-          wire: "1111111111"
+        ach: "111111111",
+        wire: "1111111111"
       },
       inflow: inflow,
       outflow: outflow,

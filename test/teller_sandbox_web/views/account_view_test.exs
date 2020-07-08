@@ -2,7 +2,6 @@ defmodule TellerSandboxWeb.AccountViewTest do
   use TellerSandboxWeb.ConnCase
   alias TellerSandboxWeb.AccountView
 
-
   test "get accounts" do
     account_1 = TellerSandboxWeb.Factory.account_factory()
     account_2 = TellerSandboxWeb.Factory.account_factory()

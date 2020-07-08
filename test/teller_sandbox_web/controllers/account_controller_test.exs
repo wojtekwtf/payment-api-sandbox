@@ -18,7 +18,7 @@ defmodule TellerSandboxWeb.AccountControllerTest do
   end
 
   test "get single account", %{conn: conn} do
-        conn = get(conn, Routes.account_path(conn, :show, "test_acc_G8mwe67W"))
+    conn = get(conn, Routes.account_path(conn, :show, "test_acc_G8mwe67W"))
 
     response_data = json_response(conn, 200)
 
@@ -26,7 +26,6 @@ defmodule TellerSandboxWeb.AccountControllerTest do
   end
 
   def validate_account_fields(object) do
-
     # TODO validate with regex
     assert String.length(object["account_number"]) == 10
     # assert object["balances"]["available"] > 0
