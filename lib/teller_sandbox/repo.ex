@@ -93,6 +93,7 @@ defmodule TellerSandbox.Repo do
       }
     ]
     |> Enum.map(fn account -> TellerSandbox.Account.set_account_balance(account) end)
+    |> Enum.map(fn account -> TellerSandbox.Account.set_links(account) end)
   end
 
   def get_account_by_id(account_id) do

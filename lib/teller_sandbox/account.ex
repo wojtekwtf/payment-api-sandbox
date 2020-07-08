@@ -29,6 +29,18 @@ defmodule RoutingNumbers do
   defstruct ach: "", wire: ""
 end
 
+defmodule AccountLinks do
+  @derive Jason.Encoder
+  defstruct self: "", transactions: ""
+
+  def get_account_links(account) do
+    %AccountLinks{
+      self: TellerSandboxWeb.Endpoint.url <> "/api/accounts/" <> account.id,
+      transactions: TellerSandboxWeb.Endpoint.url <> "/api/accounts/" <> account.id <> "/transactions"
+    }
+  end
+end
+
 defmodule TellerSandbox.Account do
   @derive {Jason.Encoder,
            only: [
@@ -38,6 +50,7 @@ defmodule TellerSandbox.Account do
              :enrollment_id,
              :id,
              :institution,
+             :links,
              :name,
              :routing_numbers
            ]}
@@ -51,9 +64,14 @@ defmodule TellerSandbox.Account do
             routing_numbers: %RoutingNumbers{},
             inflow: 0,
             outflow: 0,
+            links: %AccountLinks{},
             start_date: Date.utc_today()
 
   def set_account_balance(account, end_date \\ Date.utc_today()) do
     %{account | balances: Balance.get_account_balance(account, end_date)}
+  end
+
+  def set_links(account) do
+    %{account | links: AccountLinks.get_account_links(account)}
   end
 end

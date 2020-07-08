@@ -10,7 +10,7 @@ defmodule TellerSandboxWeb.Router do
     pipe_through :api
 
     resources "/accounts", AccountController, only: [:index, :show]
-    resources "/accounts/:account_id/transactions", TransactionController, only: [:index]
+    resources "/accounts/:account_id/transactions", TransactionController, only: [:index, :show]
   end
 
   scope "/token", TellerSandboxWeb do

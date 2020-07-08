@@ -1,13 +1,30 @@
+defmodule TransactionLinks do
+  @derive Jason.Encoder
+  defstruct self: "", account: ""
+
+  def get_transaction_links(transaction) do
+    %TransactionLinks{
+      self: TellerSandboxWeb.Endpoint.url <> "/api/accounts/" <> transaction.account_id <> "/transactions/" <> transaction.id,
+      account: TellerSandboxWeb.Endpoint.url <> "/api/accounts/" <> transaction.account_id
+    }
+  end
+end
+
 defmodule TellerSandbox.Transaction do
   @derive {Jason.Encoder,
-           only: [:type, :running_balance, :id, :description, :date, :amount, :account_id]}
+           only: [:type, :running_balance, :links, :id, :description, :date, :amount, :account_id]}
   defstruct type: "",
             running_balance: 0,
+            links: %TransactionLinks{},
             id: "",
             description: "",
             date: "",
             amount: 0,
             account_id: ""
+
+  def set_links(transaction) do
+    %{transaction | links: TransactionLinks.get_transaction_links(transaction)}
+  end
 
   def generate_transactions(account) do
     days_since_start = Date.diff(Date.utc_today(), account.start_date)
@@ -31,6 +48,7 @@ defmodule TellerSandbox.Transaction do
       amount: amount,
       account_id: account.id
     }
+    |> TellerSandbox.Transaction.set_links()
   end
 
   defp get_transaction_amount(day, account) do
