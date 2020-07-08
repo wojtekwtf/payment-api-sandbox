@@ -1,5 +1,4 @@
 defmodule TellerSandboxWeb.Factory do
-  # TODO improve the factory
   def account_factory(inflow \\ 600, outflow \\ 100, start_date \\ ~D[2020-06-06]) do
     %TellerSandbox.Account{
       account_number: "1111111111",
@@ -23,17 +22,17 @@ defmodule TellerSandboxWeb.Factory do
 
   def account_factory_with_balance(inflow \\ 600, outflow \\ 100, start_date \\ ~D[2020-06-06]) do
     account_factory(inflow, outflow, start_date)
-    |> TellerSandbox.Account.set_balances()
+    |> TellerSandbox.Account.set_account_balance()
   end
 
   def transaction_factory do
     %TellerSandbox.Transaction{
       type: "card_payment",
-      running_balance: 1000,
-      id: "test_txn_1",
+      running_balance: :rand.uniform(10000),
+      id: "test_txn_12345678",
       description: "test",
-      date: "",
-      amount: 100,
+      date: ~D[2020-01-01],
+      amount: :rand.uniform(10000),
       account_id: "test_acc_11111111"
     }
   end

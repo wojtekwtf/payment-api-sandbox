@@ -6,8 +6,8 @@ defmodule TellerSandboxWeb.AccountController do
     render(conn, "index.json", %{accounts: accounts})
   end
 
-  def show(conn, %{"id" => id}) do
-    account = TellerSandbox.Repo.get_account_by_id(id)
+  def show(conn, %{"id" => account_id}) do
+    account = TellerSandbox.Repo.get_account_by_id(account_id)
     render(conn, "account.json", %{account: account})
   end
 end

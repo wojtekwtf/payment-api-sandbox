@@ -92,7 +92,7 @@ defmodule TellerSandbox.Repo do
         start_date: ~D[2020-03-01]
       }
     ]
-    |> Enum.map(fn account -> TellerSandbox.Account.set_balances(account) end)
+    |> Enum.map(fn account -> TellerSandbox.Account.set_account_balance(account) end)
   end
 
   def get_account_by_id(account_id) do

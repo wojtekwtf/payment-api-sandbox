@@ -31,7 +31,7 @@ defmodule TellerSandbox.BalanceTest do
     assert account.balances.available == 0
     assert account.balances.ledger == 0
 
-    account = TellerSandbox.Account.set_balances(account, ~D[2020-07-09])
+    account = TellerSandbox.Account.set_account_balance(account, ~D[2020-07-09])
     assert account.balances.available == 200
     assert account.balances.ledger == 200
   end

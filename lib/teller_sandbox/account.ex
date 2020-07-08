@@ -2,13 +2,12 @@ defmodule Balance do
   @derive Jason.Encoder
   defstruct available: 0, ledger: 0
 
-  # TODO clarify
   def get_account_balance(account, end_date \\ Date.utc_today()) do
-    account_days = Date.diff(end_date, account.start_date)
+    account_age_days = Date.diff(end_date, account.start_date)
 
-    inflow_days = div(account_days, 7)
+    inflow_days = div(account_age_days, 7)
 
-    total_outflow = (account_days - inflow_days) * account.outflow
+    total_outflow = (account_age_days - inflow_days) * account.outflow
     total_inflow = inflow_days * account.inflow
 
     balance = total_inflow - total_outflow
@@ -54,7 +53,7 @@ defmodule TellerSandbox.Account do
             outflow: 0,
             start_date: Date.utc_today()
 
-  def set_balances(account, end_date \\ Date.utc_today()) do
+  def set_account_balance(account, end_date \\ Date.utc_today()) do
     %{account | balances: Balance.get_account_balance(account, end_date)}
   end
 end

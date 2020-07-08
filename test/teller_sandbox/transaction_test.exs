@@ -16,12 +16,9 @@ defmodule TellerSanbox.TransactionTest do
     account = TellerSandboxWeb.Factory.account_factory(500, 300, ~D[2020-07-01])
     transaction = TellerSandbox.Transaction.create_transaction(1, account)
 
-    # TODO no other type supported yet
     assert transaction.type == "card_payment"
     assert transaction.running_balance == -300
-    assert String.starts_with?(transaction.id, "test_txn_")
-    assert String.length(transaction.id) == 17
-    # TODO no other description supported yet
+    assert String.match?(transaction.id, ~r/^test_txn_.{8}$/)
     assert transaction.description == "test"
     assert transaction.date == ~D[2020-07-02]
     assert transaction.amount == -300
