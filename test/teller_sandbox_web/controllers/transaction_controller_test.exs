@@ -1,6 +1,13 @@
 defmodule TellerSandboxWeb.TransactionControllerTest do
   use TellerSandboxWeb.ConnCase
 
+  setup %{conn: conn} do
+    conn = put_req_header(conn, "content-type", "application/json")
+    conn = put_req_header(conn, "authorization", "test_AgBfBU-Ph-NciDT2Hekssaf")
+
+    {:ok, %{conn: conn}}
+  end
+
   test "get account transactions", %{conn: conn} do
     account_id = "test_acc_J1nzh90Z"
     account = TellerSandbox.Repo.get_account_by_id(account_id)

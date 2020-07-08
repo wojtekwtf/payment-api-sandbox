@@ -1,8 +1,16 @@
 defmodule TellerSandboxWeb.AccountControllerTest do
   use TellerSandboxWeb.ConnCase
 
+  setup %{conn: conn} do
+    conn = put_req_header(conn, "content-type", "application/json")
+    conn = put_req_header(conn, "authorization", "test_AgBfBU-Ph-NciDT2Hekssaf")
+
+    {:ok, %{conn: conn}}
+  end
+
   test "get accounts", %{conn: conn} do
     conn = get(conn, Routes.account_path(conn, :index))
+
     response_data = json_response(conn, 200)
 
     assert length(response_data) == 5
@@ -10,7 +18,8 @@ defmodule TellerSandboxWeb.AccountControllerTest do
   end
 
   test "get single account", %{conn: conn} do
-    conn = get(conn, Routes.account_path(conn, :show, "test_acc_G8mwe67W"))
+        conn = get(conn, Routes.account_path(conn, :show, "test_acc_G8mwe67W"))
+
     response_data = json_response(conn, 200)
 
     validate_account_fields(response_data)
