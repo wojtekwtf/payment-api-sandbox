@@ -34,7 +34,7 @@ defmodule TellerSandboxWeb.AccountControllerTest do
     assert String.match?(object["institution"]["name"], ~r/.*/)
     assert String.match?(object["name"], ~r/.*/)
     assert String.match?(object["routing_numbers"]["ach"], ~r/^\d{9}$/)
-    assert String.match?(object["routing_numbers"]["wire"], ~r/^\d{10}$/)
+    assert String.match?(object["routing_numbers"]["wire"], ~r/^\d{9}$/)
     refute Map.has_key?(object, :inflow)
     refute Map.has_key?(object, :outflow)
   end

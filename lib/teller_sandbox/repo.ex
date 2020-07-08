@@ -14,7 +14,7 @@ defmodule TellerSandbox.Repo do
         name: "Test 🦁 account",
         routing_numbers: %RoutingNumbers{
           ach: "123456789",
-          wire: "1234567890"
+          wire: "123456789"
         },
         inflow: 1000,
         outflow: 100,
@@ -32,7 +32,7 @@ defmodule TellerSandbox.Repo do
         name: "Test 🐸 account",
         routing_numbers: %RoutingNumbers{
           ach: "234567891",
-          wire: "2345678910"
+          wire: "234567891"
         },
         inflow: 700,
         outflow: 100,
@@ -50,7 +50,7 @@ defmodule TellerSandbox.Repo do
         name: "Test 🐻 account",
         routing_numbers: %RoutingNumbers{
           ach: "345678912",
-          wire: "3456789120"
+          wire: "345678912"
         },
         inflow: 2100,
         outflow: 300,
@@ -68,7 +68,7 @@ defmodule TellerSandbox.Repo do
         name: "Test 🐼 account",
         routing_numbers: %RoutingNumbers{
           ach: "456789123",
-          wire: "4567891230"
+          wire: "456789123"
         },
         inflow: 8000,
         outflow: 500,
@@ -86,7 +86,7 @@ defmodule TellerSandbox.Repo do
         name: "Test 👁👄👁 account",
         routing_numbers: %RoutingNumbers{
           ach: "567891234",
-          wire: "5678912340"
+          wire: "567891234"
         },
         inflow: 6000,
         outflow: 100,

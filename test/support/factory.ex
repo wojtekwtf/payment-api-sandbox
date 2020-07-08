@@ -1,4 +1,5 @@
 defmodule TellerSandboxWeb.Factory do
+  @spec account_factory(number(), number(), Date.t()) :: TellerSandbox.Account.t()
   def account_factory(inflow \\ 600, outflow \\ 100, start_date \\ ~D[2020-06-06]) do
     %TellerSandbox.Account{
       account_number: "1111111111",
@@ -12,7 +13,7 @@ defmodule TellerSandboxWeb.Factory do
       name: "Test account",
       routing_numbers: %RoutingNumbers{
         ach: "111111111",
-        wire: "1111111111"
+        wire: "111111111"
       },
       inflow: inflow,
       outflow: outflow,
@@ -20,11 +21,7 @@ defmodule TellerSandboxWeb.Factory do
     }
   end
 
-  def account_factory_with_balance(inflow \\ 600, outflow \\ 100, start_date \\ ~D[2020-06-06]) do
-    account_factory(inflow, outflow, start_date)
-    |> TellerSandbox.Account.set_account_balance()
-  end
-
+  @spec transaction_factory :: TellerSandbox.Transaction.t()
   def transaction_factory do
     %TellerSandbox.Transaction{
       type: "card_payment",

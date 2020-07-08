@@ -33,4 +33,21 @@ defmodule TellerSandbox.BalanceTest do
     assert account.balances.available == 200
     assert account.balances.ledger == 200
   end
+
+  test "get account links" do
+    account = TellerSandboxWeb.Factory.account_factory()
+    links = AccountLinks.get_account_links(account)
+
+    assert links.self == TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111"
+    assert links.transactions == TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111/transactions"
+  end
+
+  test "set account links" do
+    account = TellerSandboxWeb.Factory.account_factory()
+    |> TellerSandbox.Account.set_links()
+
+    assert account.links.self == TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111"
+    assert account.links.transactions == TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111/transactions"
+
+  end
 end

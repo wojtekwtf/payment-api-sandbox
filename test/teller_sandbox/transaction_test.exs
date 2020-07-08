@@ -2,7 +2,10 @@ defmodule TellerSanbox.TransactionTest do
   use ExUnit.Case
 
   test "transactions value equal to account balance" do
-    account = TellerSandboxWeb.Factory.account_factory_with_balance()
+    account =
+      TellerSandboxWeb.Factory.account_factory()
+      |> TellerSandbox.Account.set_account_balance()
+
     transactions = TellerSandbox.Transaction.generate_transactions(account)
 
     transaction_sum =
@@ -23,5 +26,21 @@ defmodule TellerSanbox.TransactionTest do
     assert transaction.date == ~D[2020-07-02]
     assert transaction.amount == -300
     assert transaction.account_id == account.id
+  end
+
+  test "get transaction links" do
+    transaction = TellerSandboxWeb.Factory.transaction_factory()
+    links = TransactionLinks.get_transaction_links(transaction)
+
+    assert links.self == TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111/transactions/test_txn_12345678"
+    assert links.account == TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111"
+  end
+
+  test "set transaction links" do
+    transaction = TellerSandboxWeb.Factory.transaction_factory()
+    |> TellerSandbox.Transaction.set_links()
+
+    assert transaction.links.self == TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111/transactions/test_txn_12345678"
+    assert transaction.links.account == TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111"
   end
 end

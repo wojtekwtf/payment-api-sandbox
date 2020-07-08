@@ -95,7 +95,7 @@ defmodule TellerSandbox.Account do
 
   @type t :: %TellerSandbox.Account{
           account_number: String.t(),
-          balances: Balance.t(),
+          balances: Balance.t() | nil,
           currency_code: String.t(),
           enrollment_id: String.t(),
           id: String.t(),
@@ -104,7 +104,7 @@ defmodule TellerSandbox.Account do
           routing_numbers: RoutingNumbers.t(),
           inflow: number,
           outflow: number,
-          links: AccountLinks.t(),
+          links: AccountLinks.t() | nil,
           start_date: Date.t()
         }
 
