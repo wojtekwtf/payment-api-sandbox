@@ -13,6 +13,10 @@ defmodule TellerSandboxWeb.Router do
     resources "/accounts/:account_id/transactions", TransactionController, only: [:index]
   end
 
+  scope "/token", TellerSandboxWeb do
+    get "/", TokenController, :index
+  end
+
   # Enables LiveDashboard only for development
   #
   # If you want to use the LiveDashboard in production, you should put
