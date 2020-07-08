@@ -2,7 +2,6 @@ defmodule TellerSandboxWeb.AccountControllerTest do
   use TellerSandboxWeb.ConnCase
 
   setup %{conn: conn} do
-    conn = put_req_header(conn, "content-type", "application/json")
     conn = put_req_header(conn, "authorization", "test_AgBfBU-Ph-NciDT2Hekssaf")
 
     {:ok, %{conn: conn}}

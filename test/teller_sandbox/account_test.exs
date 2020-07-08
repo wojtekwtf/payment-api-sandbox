@@ -39,15 +39,20 @@ defmodule TellerSandbox.BalanceTest do
     links = AccountLinks.get_account_links(account)
 
     assert links.self == TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111"
-    assert links.transactions == TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111/transactions"
+
+    assert links.transactions ==
+             TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111/transactions"
   end
 
   test "set account links" do
-    account = TellerSandboxWeb.Factory.account_factory()
-    |> TellerSandbox.Account.set_links()
+    account =
+      TellerSandboxWeb.Factory.account_factory()
+      |> TellerSandbox.Account.set_links()
 
-    assert account.links.self == TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111"
-    assert account.links.transactions == TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111/transactions"
+    assert account.links.self ==
+             TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111"
 
+    assert account.links.transactions ==
+             TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111/transactions"
   end
 end

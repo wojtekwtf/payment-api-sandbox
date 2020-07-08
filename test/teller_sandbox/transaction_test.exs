@@ -32,15 +32,23 @@ defmodule TellerSanbox.TransactionTest do
     transaction = TellerSandboxWeb.Factory.transaction_factory()
     links = TransactionLinks.get_transaction_links(transaction)
 
-    assert links.self == TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111/transactions/test_txn_12345678"
+    assert links.self ==
+             TellerSandboxWeb.Endpoint.url() <>
+               "/api/accounts/test_acc_11111111/transactions/test_txn_12345678"
+
     assert links.account == TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111"
   end
 
   test "set transaction links" do
-    transaction = TellerSandboxWeb.Factory.transaction_factory()
-    |> TellerSandbox.Transaction.set_links()
+    transaction =
+      TellerSandboxWeb.Factory.transaction_factory()
+      |> TellerSandbox.Transaction.set_links()
 
-    assert transaction.links.self == TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111/transactions/test_txn_12345678"
-    assert transaction.links.account == TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111"
+    assert transaction.links.self ==
+             TellerSandboxWeb.Endpoint.url() <>
+               "/api/accounts/test_acc_11111111/transactions/test_txn_12345678"
+
+    assert transaction.links.account ==
+             TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111"
   end
 end
