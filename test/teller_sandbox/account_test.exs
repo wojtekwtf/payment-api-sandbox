@@ -28,8 +28,6 @@ defmodule TellerSandbox.BalanceTest do
 
   test "set account balance" do
     account = TellerSandboxWeb.Factory.account_factory(900, 100, ~D[2020-07-01])
-    assert account.balances.available == 0
-    assert account.balances.ledger == 0
 
     account = TellerSandbox.Account.set_account_balance(account, ~D[2020-07-09])
     assert account.balances.available == 200

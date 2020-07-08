@@ -1,4 +1,5 @@
 defmodule TellerSandbox.Repo do
+  @spec get_all_accounts :: [TellerSandbox.Account.t()]
   def get_all_accounts() do
     [
       %TellerSandbox.Account{
@@ -96,11 +97,13 @@ defmodule TellerSandbox.Repo do
     |> Enum.map(fn account -> TellerSandbox.Account.set_links(account) end)
   end
 
+  @spec get_account_by_id(String.t()) :: TellerSandbox.Account.t()
   def get_account_by_id(account_id) do
     get_all_accounts()
     |> Enum.find(fn account -> account.id == account_id end)
   end
 
+  @spec get_account_transactions(String.t()) :: [TellerSandbox.Transaction.t()]
   def get_account_transactions(account_id) do
     get_account_by_id(account_id)
     |> TellerSandbox.Transaction.generate_transactions()
