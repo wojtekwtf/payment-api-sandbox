@@ -1,9 +1,9 @@
-defmodule TellerSandbox.MixProject do
+defmodule PaymentSandbox.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :teller_sandbox,
+      app: :payment_sandbox,
       version: "0.1.0",
       elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -27,7 +27,7 @@ defmodule TellerSandbox.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {TellerSandbox.Application, []},
+      mod: {PaymentSandbox.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

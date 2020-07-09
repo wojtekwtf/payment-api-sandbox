@@ -1,5 +1,5 @@
-defmodule TellerSandboxWeb.TransactionControllerTest do
-  use TellerSandboxWeb.ConnCase
+defmodule PaymentSandboxWeb.TransactionControllerTest do
+  use PaymentSandboxWeb.ConnCase
 
   setup %{conn: conn} do
     conn = put_req_header(conn, "authorization", "test_AgBfBU-Ph-NciDT2Hekssaf")
@@ -9,7 +9,7 @@ defmodule TellerSandboxWeb.TransactionControllerTest do
 
   test "get account transactions", %{conn: conn} do
     account_id = "test_acc_J1nzh90Z"
-    account = TellerSandbox.Repo.get_account_by_id(account_id)
+    account = PaymentSandbox.Repo.get_account_by_id(account_id)
     conn = get(conn, Routes.transaction_path(conn, :index, account_id))
 
     response_data = json_response(conn, 200)
@@ -23,7 +23,7 @@ defmodule TellerSandboxWeb.TransactionControllerTest do
   test "get account transactions fake detail", %{conn: conn} do
     # this test just checks if the "detail" transaction view behaves the same as list
     account_id = "test_acc_J1nzh90Z"
-    account = TellerSandbox.Repo.get_account_by_id(account_id)
+    account = PaymentSandbox.Repo.get_account_by_id(account_id)
     conn = get(conn, Routes.transaction_path(conn, :show, account_id, "doesnt_matter"))
 
     response_data = json_response(conn, 200)

@@ -1,18 +1,14 @@
-# Teller Sandbox
-
-Hello Stevie & Dan! 👋
-
-This is the repo for the recruitment task that Tim gave me. Hope you will enjoy it!
-
-I recorded a short video walk-through, for easier testing / getting familiar with
-the project. Hope you enjoy it! *PLACEHOLDER*
-
-The API has been deployed with [Gigalixir](https://teller-sandbox.gigalixirapp.com/accounts/) (without the LiveDashboard)
-
+# Payment Sandbox
+A fun & short Elixir implementation of a CRUD payments API. Features include:
+- Historical transactions should be generated going back a few months for an account, with new transactions appearing over time
+- Repeat requests should return the same account information however the balances should behave like a real bank account and occasionally change
+- The sum of the transactions should match the balance of the account resource they are associated with
+- No databases or data stores — the data is generated in real time on server
+- Token authentication (however it doesn't identify the user – just check for token properties)
 ## API structure
 
 ### Authorization header
-Sandbox requests require a header `Authorization`. Its value should be a string starting with word `test_`.
+Sandbox requests require a header `Authorization`. Its value should be a 28 characters long string starting with `test_`.
 You can obtain it with the `GET /token` endpoint.
 
 ### Endpoints
@@ -68,6 +64,10 @@ The project is not production ready. If I had more time to work on it, I would a
 6. Real /transactions/:id endpoint
 
 
-## Summary
-Thanks for giving my application a chance! My finance and tech inside nerds will be so
-excited about working on Teller. Let's not disappoint them!
+## Disclaimer
+This has originally been a recruitment task for a fintech *company*. I didn't get the
+job, so the repo is now open sourced. You can probably tell by the old commits.
+I only anonymized it so search engines don't index it as *company* recruitment task
+
+I am low key satisfied with it and don't want the time devoted to the project to be lost.
+I think that's fair, but if you are from the *company* and think otherwise please let me know.

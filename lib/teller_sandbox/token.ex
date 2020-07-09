@@ -1,22 +1,22 @@
-defmodule TellerSandbox.Token do
+defmodule PaymentSandbox.Token do
   @derive Jason.Encoder
   defstruct [:token]
 
-  @type t :: %TellerSandbox.Token{
+  @type t :: %PaymentSandbox.Token{
           token: String.t()
         }
 
   @spec missing_token_error_message :: String.t()
   def missing_token_error_message do
-    token_url = TellerSandboxWeb.Endpoint.url() <> "/token"
+    token_url = PaymentSandboxWeb.Endpoint.url() <> "/token"
 
     "You need an authorization token to run this request. Get yours at " <>
       token_url <> " and put it in the authorization header"
   end
 
-  @spec generate_api_token :: TellerSandbox.Token.t()
+  @spec generate_api_token :: PaymentSandbox.Token.t()
   def generate_api_token do
-    %TellerSandbox.Token{
+    %PaymentSandbox.Token{
       token: "test_" <> generate_random_string(23)
     }
   end

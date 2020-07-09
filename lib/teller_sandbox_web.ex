@@ -1,12 +1,12 @@
-defmodule TellerSandboxWeb do
+defmodule PaymentSandboxWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use TellerSandboxWeb, :controller
-      use TellerSandboxWeb, :view
+      use PaymentSandboxWeb, :controller
+      use PaymentSandboxWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,19 +19,19 @@ defmodule TellerSandboxWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: TellerSandboxWeb
+      use Phoenix.Controller, namespace: PaymentSandboxWeb
 
       import Plug.Conn
-      import TellerSandboxWeb.Gettext
-      alias TellerSandboxWeb.Router.Helpers, as: Routes
+      import PaymentSandboxWeb.Gettext
+      alias PaymentSandboxWeb.Router.Helpers, as: Routes
     end
   end
 
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/teller_sandbox_web/templates",
-        namespace: TellerSandboxWeb
+        root: "lib/payment_sandbox_web/templates",
+        namespace: PaymentSandboxWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
@@ -54,7 +54,7 @@ defmodule TellerSandboxWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import TellerSandboxWeb.Gettext
+      import PaymentSandboxWeb.Gettext
     end
   end
 
@@ -63,9 +63,9 @@ defmodule TellerSandboxWeb do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
-      import TellerSandboxWeb.ErrorHelpers
-      import TellerSandboxWeb.Gettext
-      alias TellerSandboxWeb.Router.Helpers, as: Routes
+      import PaymentSandboxWeb.ErrorHelpers
+      import PaymentSandboxWeb.Gettext
+      alias PaymentSandboxWeb.Router.Helpers, as: Routes
     end
   end
 

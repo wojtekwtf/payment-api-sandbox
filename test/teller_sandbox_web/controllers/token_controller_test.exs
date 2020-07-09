@@ -1,5 +1,5 @@
-defmodule TellerSandboxWeb.TokenControllerTest do
-  use TellerSandboxWeb.ConnCase
+defmodule PaymentSandboxWeb.TokenControllerTest do
+  use PaymentSandboxWeb.ConnCase
 
   test "get token", %{conn: conn} do
     conn = get(conn, Routes.token_path(conn, :index))

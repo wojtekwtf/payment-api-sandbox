@@ -1,16 +1,16 @@
-defmodule TellerSandboxWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :teller_sandbox
+defmodule PaymentSandboxWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :payment_sandbox
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "_teller_sandbox_key",
+    key: "_payment_sandbox_key",
     signing_salt: "XElDT4QT"
   ]
 
-  socket "/socket", TellerSandboxWeb.UserSocket,
+  socket "/socket", PaymentSandboxWeb.UserSocket,
     websocket: true,
     longpoll: false
 
@@ -22,7 +22,7 @@ defmodule TellerSandboxWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :teller_sandbox,
+    from: :payment_sandbox,
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
@@ -47,5 +47,5 @@ defmodule TellerSandboxWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug TellerSandboxWeb.Router
+  plug PaymentSandboxWeb.Router
 end

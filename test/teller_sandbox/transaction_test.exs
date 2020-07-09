@@ -1,12 +1,12 @@
-defmodule TellerSanbox.TransactionTest do
+defmodule PaymentSanbox.TransactionTest do
   use ExUnit.Case
 
   test "transactions value equal to account balance" do
     account =
-      TellerSandboxWeb.Factory.account_factory()
-      |> TellerSandbox.Account.set_account_balance()
+      PaymentSandboxWeb.Factory.account_factory()
+      |> PaymentSandbox.Account.set_account_balance()
 
-    transactions = TellerSandbox.Transaction.generate_transactions(account)
+    transactions = PaymentSandbox.Transaction.generate_transactions(account)
 
     transaction_sum =
       Enum.map(transactions, fn transaction -> transaction.amount end)
@@ -16,8 +16,8 @@ defmodule TellerSanbox.TransactionTest do
   end
 
   test "create single transaction" do
-    account = TellerSandboxWeb.Factory.account_factory(500, 300, ~D[2020-07-01])
-    transaction = TellerSandbox.Transaction.create_transaction(1, account)
+    account = PaymentSandboxWeb.Factory.account_factory(500, 300, ~D[2020-07-01])
+    transaction = PaymentSandbox.Transaction.create_transaction(1, account)
 
     assert transaction.type == "card_payment"
     assert transaction.running_balance == -300
@@ -29,7 +29,7 @@ defmodule TellerSanbox.TransactionTest do
   end
 
   test "get transaction links" do
-    transaction = TellerSandboxWeb.Factory.transaction_factory()
+    transaction = PaymentSandboxWeb.Factory.transaction_factory()
     links = TransactionLinks.get_transaction_links(transaction)
 
     assert links.self ==
@@ -40,8 +40,8 @@ defmodule TellerSanbox.TransactionTest do
 
   test "set transaction links" do
     transaction =
-      TellerSandboxWeb.Factory.transaction_factory()
-      |> TellerSandbox.Transaction.set_links()
+      PaymentSandboxWeb.Factory.transaction_factory()
+      |> PaymentSandbox.Transaction.set_links()
 
     assert transaction.links.self ==
              "http://localhost:4002/accounts/test_acc_11111111/transactions/test_txn_12345678"

@@ -1,11 +1,11 @@
-defmodule TellerSandboxWeb.AccountViewTest do
-  use TellerSandboxWeb.ConnCase
-  alias TellerSandboxWeb.AccountView
+defmodule PaymentSandboxWeb.AccountViewTest do
+  use PaymentSandboxWeb.ConnCase
+  alias PaymentSandboxWeb.AccountView
 
   test "get accounts" do
-    account_1 = TellerSandboxWeb.Factory.account_factory()
-    account_2 = TellerSandboxWeb.Factory.account_factory()
-    account_3 = TellerSandboxWeb.Factory.account_factory()
+    account_1 = PaymentSandboxWeb.Factory.account_factory()
+    account_2 = PaymentSandboxWeb.Factory.account_factory()
+    account_3 = PaymentSandboxWeb.Factory.account_factory()
 
     accounts = [account_1, account_2, account_3]
 
@@ -15,7 +15,7 @@ defmodule TellerSandboxWeb.AccountViewTest do
   end
 
   test "get account detail" do
-    account = TellerSandboxWeb.Factory.account_factory()
+    account = PaymentSandboxWeb.Factory.account_factory()
 
     rendered_account = AccountView.render("account.json", %{account: account})
 

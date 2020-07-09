@@ -1,4 +1,4 @@
-defmodule TellerSandboxWeb.Telemetry do
+defmodule PaymentSandboxWeb.Telemetry do
   use Supervisor
   import Telemetry.Metrics
 
@@ -42,7 +42,7 @@ defmodule TellerSandboxWeb.Telemetry do
     [
       # A module, function and arguments to be invoked periodically.
       # This function must call :telemetry.execute/3 and a metric must be added above.
-      # {TellerSandboxWeb, :count_users, []}
+      # {PaymentSandboxWeb, :count_users, []}
     ]
   end
 end

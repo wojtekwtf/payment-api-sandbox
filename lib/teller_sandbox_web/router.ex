@@ -1,19 +1,19 @@
-defmodule TellerSandboxWeb.Router do
-  use TellerSandboxWeb, :router
+defmodule PaymentSandboxWeb.Router do
+  use PaymentSandboxWeb, :router
 
   pipeline :api do
     plug :accepts, ["json"]
     plug :validate_test_token_header
   end
 
-  scope "/", TellerSandboxWeb do
+  scope "/", PaymentSandboxWeb do
     pipe_through :api
 
     resources "/accounts", AccountController, only: [:index, :show]
     resources "/accounts/:account_id/transactions", TransactionController, only: [:index, :show]
   end
 
-  scope "/", TellerSandboxWeb do
+  scope "/", PaymentSandboxWeb do
     # doesn't check the token
     get "/token", TokenController, :index
   end
@@ -30,7 +30,7 @@ defmodule TellerSandboxWeb.Router do
 
     scope "/" do
       pipe_through [:fetch_session, :protect_from_forgery]
-      live_dashboard "/dashboard", metrics: TellerSandboxWeb.Telemetry
+      live_dashboard "/dashboard", metrics: PaymentSandboxWeb.Telemetry
     end
   end
 
@@ -55,7 +55,7 @@ defmodule TellerSandboxWeb.Router do
   defp send_401_unauthorized_http_response(conn) do
     conn
     |> put_status(:unauthorized)
-    |> put_view(TellerSandboxWeb.ErrorView)
+    |> put_view(PaymentSandboxWeb.ErrorView)
     |> render(:"401")
     |> halt
   end

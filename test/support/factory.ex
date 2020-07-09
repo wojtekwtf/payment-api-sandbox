@@ -1,7 +1,7 @@
-defmodule TellerSandboxWeb.Factory do
-  @spec account_factory(number(), number(), Date.t()) :: TellerSandbox.Account.t()
+defmodule PaymentSandboxWeb.Factory do
+  @spec account_factory(number(), number(), Date.t()) :: PaymentSandbox.Account.t()
   def account_factory(inflow \\ 600, outflow \\ 100, start_date \\ ~D[2020-06-06]) do
-    %TellerSandbox.Account{
+    %PaymentSandbox.Account{
       account_number: "1111111111",
       currency_code: "USD",
       enrollment_id: "test_enr_11111111",
@@ -21,9 +21,9 @@ defmodule TellerSandboxWeb.Factory do
     }
   end
 
-  @spec transaction_factory :: TellerSandbox.Transaction.t()
+  @spec transaction_factory :: PaymentSandbox.Transaction.t()
   def transaction_factory do
-    %TellerSandbox.Transaction{
+    %PaymentSandbox.Transaction{
       type: "card_payment",
       running_balance: :rand.uniform(10000),
       id: "test_txn_12345678",

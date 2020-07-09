@@ -7,24 +7,24 @@ defmodule TransactionLinks do
           account: String.t()
         }
 
-  @spec get_transaction_links(TellerSandbox.Transaction.t()) :: TransactionLinks.t()
+  @spec get_transaction_links(PaymentSandbox.Transaction.t()) :: TransactionLinks.t()
   def get_transaction_links(transaction) do
     %TransactionLinks{
       self:
-        TellerSandboxWeb.Endpoint.url() <>
+        PaymentSandboxWeb.Endpoint.url() <>
           "/accounts/" <> transaction.account_id <> "/transactions/" <> transaction.id,
-      account: TellerSandboxWeb.Endpoint.url() <> "/accounts/" <> transaction.account_id
+      account: PaymentSandboxWeb.Endpoint.url() <> "/accounts/" <> transaction.account_id
     }
   end
 end
 
-defmodule TellerSandbox.Transaction do
+defmodule PaymentSandbox.Transaction do
   @derive {Jason.Encoder,
            only: [:type, :running_balance, :links, :id, :description, :date, :amount, :account_id]}
 
   defstruct [:type, :running_balance, :links, :id, :description, :date, :amount, :account_id]
 
-  @type t :: %TellerSandbox.Transaction{
+  @type t :: %PaymentSandbox.Transaction{
           type: String.t(),
           running_balance: number(),
           links: TransactionLinks.t() | nil,
@@ -35,12 +35,12 @@ defmodule TellerSandbox.Transaction do
           account_id: String.t()
         }
 
-  @spec set_links(TellerSandbox.Transaction.t()) :: TellerSandbox.Transaction.t()
+  @spec set_links(PaymentSandbox.Transaction.t()) :: PaymentSandbox.Transaction.t()
   def set_links(transaction) do
     %{transaction | links: TransactionLinks.get_transaction_links(transaction)}
   end
 
-  @spec generate_transactions(TellerSandbox.Account.t()) :: [TellerSandbox.Transaction.t()]
+  @spec generate_transactions(PaymentSandbox.Account.t()) :: [PaymentSandbox.Transaction.t()]
   def generate_transactions(account) do
     if account == nil do
       []
@@ -53,14 +53,14 @@ defmodule TellerSandbox.Transaction do
     end
   end
 
-  @spec create_transaction(number(), TellerSandbox.Account.t()) :: TellerSandbox.Transaction.t()
+  @spec create_transaction(number(), PaymentSandbox.Account.t()) :: PaymentSandbox.Transaction.t()
   def create_transaction(day, account) do
     amount = get_transaction_amount(day, account)
     date = get_transaction_date(day, account)
     running_balance = Balance.get_account_balance(account, date).available
     txn_id = "test_txn_" <> get_txn_id()
 
-    %TellerSandbox.Transaction{
+    %PaymentSandbox.Transaction{
       type: "card_payment",
       running_balance: running_balance,
       id: txn_id,
@@ -70,10 +70,10 @@ defmodule TellerSandbox.Transaction do
       account_id: account.id
     }
 
-    # |> TellerSandbox.Transaction.set_links()
+    # |> PaymentSandbox.Transaction.set_links()
   end
 
-  @spec get_transaction_amount(number(), TellerSandbox.Account.t()) :: number()
+  @spec get_transaction_amount(number(), PaymentSandbox.Account.t()) :: number()
   defp get_transaction_amount(day, account) do
     cond do
       rem(day, 7) == 0 ->
@@ -84,7 +84,7 @@ defmodule TellerSandbox.Transaction do
     end
   end
 
-  @spec get_transaction_date(number(), TellerSandbox.Account.t()) :: Date.t()
+  @spec get_transaction_date(number(), PaymentSandbox.Account.t()) :: Date.t()
   defp get_transaction_date(day, account) do
     Date.add(account.start_date, day)
   end

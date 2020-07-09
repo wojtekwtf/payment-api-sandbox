@@ -8,11 +8,11 @@
 use Mix.Config
 
 # Configures the endpoint
-config :teller_sandbox, TellerSandboxWeb.Endpoint,
+config :payment_sandbox, PaymentSandboxWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "CvLL/BQ7zh0XTYId1veXqyCueCqzPqG5EFV00vJflAA16+VjEUePhHC8jVmZ7mA2",
-  render_errors: [view: TellerSandboxWeb.ErrorView, accepts: ~w(json), layout: false],
-  pubsub_server: TellerSandbox.PubSub,
+  render_errors: [view: PaymentSandboxWeb.ErrorView, accepts: ~w(json), layout: false],
+  pubsub_server: PaymentSandbox.PubSub,
   live_view: [signing_salt: "szTTS5le"]
 
 # Configures Elixir's Logger

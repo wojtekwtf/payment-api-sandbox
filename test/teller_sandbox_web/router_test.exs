@@ -1,12 +1,12 @@
-defmodule TellerSandboxWeb.RouterTest do
-  use TellerSandboxWeb.ConnCase
+defmodule PaymentSandboxWeb.RouterTest do
+  use PaymentSandboxWeb.ConnCase
 
   test "get accounts without the token", %{conn: conn} do
     conn = get(conn, Routes.account_path(conn, :index))
 
     response_data = json_response(conn, 401)
 
-    assert response_data["errors"]["detail"] == TellerSandbox.Token.missing_token_error_message()
+    assert response_data["errors"]["detail"] == PaymentSandbox.Token.missing_token_error_message()
   end
 
   test "get single account without the token", %{conn: conn} do
@@ -14,7 +14,7 @@ defmodule TellerSandboxWeb.RouterTest do
 
     response_data = json_response(conn, 401)
 
-    assert response_data["errors"]["detail"] == TellerSandbox.Token.missing_token_error_message()
+    assert response_data["errors"]["detail"] == PaymentSandbox.Token.missing_token_error_message()
   end
 
   test "get account transactions without the token", %{conn: conn} do
@@ -22,6 +22,6 @@ defmodule TellerSandboxWeb.RouterTest do
 
     response_data = json_response(conn, 401)
 
-    assert response_data["errors"]["detail"] == TellerSandbox.Token.missing_token_error_message()
+    assert response_data["errors"]["detail"] == PaymentSandbox.Token.missing_token_error_message()
   end
 end

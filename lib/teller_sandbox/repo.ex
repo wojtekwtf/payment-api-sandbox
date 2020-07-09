@@ -1,15 +1,15 @@
-defmodule TellerSandbox.Repo do
-  @spec get_all_accounts :: [TellerSandbox.Account.t()]
+defmodule PaymentSandbox.Repo do
+  @spec get_all_accounts :: [PaymentSandbox.Account.t()]
   def get_all_accounts() do
     [
-      %TellerSandbox.Account{
+      %PaymentSandbox.Account{
         account_number: "1234567891",
         currency_code: "USD",
         enrollment_id: "test_enr_2yzH_08f",
         id: "test_acc_F7lvd56V",
         institution: %Institution{
-          id: "teller_bank",
-          name: "The Teller Bank"
+          id: "payment_bank",
+          name: "The Payment Bank"
         },
         name: "Test 🦁 account",
         routing_numbers: %RoutingNumbers{
@@ -20,7 +20,7 @@ defmodule TellerSandbox.Repo do
         outflow: 100,
         start_date: ~D[2020-07-01]
       },
-      %TellerSandbox.Account{
+      %PaymentSandbox.Account{
         account_number: "1234567892",
         currency_code: "USD",
         enrollment_id: "test_enr_3zaI_19g",
@@ -38,7 +38,7 @@ defmodule TellerSandbox.Repo do
         outflow: 100,
         start_date: ~D[2020-06-01]
       },
-      %TellerSandbox.Account{
+      %PaymentSandbox.Account{
         account_number: "1234567893",
         currency_code: "USD",
         enrollment_id: "test_enr_4abJ_20h",
@@ -56,7 +56,7 @@ defmodule TellerSandbox.Repo do
         outflow: 300,
         start_date: ~D[2020-05-01]
       },
-      %TellerSandbox.Account{
+      %PaymentSandbox.Account{
         account_number: "1234567894",
         currency_code: "USD",
         enrollment_id: "test_enr_5bcK_31i",
@@ -74,7 +74,7 @@ defmodule TellerSandbox.Repo do
         outflow: 500,
         start_date: ~D[2020-04-01]
       },
-      %TellerSandbox.Account{
+      %PaymentSandbox.Account{
         account_number: "1234567895",
         currency_code: "USD",
         enrollment_id: "test_enr_6cdL_42j",
@@ -93,18 +93,18 @@ defmodule TellerSandbox.Repo do
         start_date: ~D[2020-03-01]
       }
     ]
-    |> Enum.map(fn account -> TellerSandbox.Account.set_account_balance(account) end)
-    |> Enum.map(fn account -> TellerSandbox.Account.set_links(account) end)
+    |> Enum.map(fn account -> PaymentSandbox.Account.set_account_balance(account) end)
+    |> Enum.map(fn account -> PaymentSandbox.Account.set_links(account) end)
   end
 
-  @spec get_account_by_id(String.t()) :: TellerSandbox.Account.t() | nil
+  @spec get_account_by_id(String.t()) :: PaymentSandbox.Account.t() | nil
   def get_account_by_id(account_id) do
     get_all_accounts()
     |> Enum.find(fn account -> account.id == account_id end)
   end
 
-  @spec get_account_transactions(TellerSandbox.Account.t()) :: [TellerSandbox.Transaction.t()]
+  @spec get_account_transactions(PaymentSandbox.Account.t()) :: [PaymentSandbox.Transaction.t()]
   def get_account_transactions(account) do
-    TellerSandbox.Transaction.generate_transactions(account)
+    PaymentSandbox.Transaction.generate_transactions(account)
   end
 end

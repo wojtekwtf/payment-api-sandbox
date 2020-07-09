@@ -1,12 +1,12 @@
-defmodule TellerSandboxWeb.TransactionViewTest do
-  use TellerSandboxWeb.ConnCase
+defmodule PaymentSandboxWeb.TransactionViewTest do
+  use PaymentSandboxWeb.ConnCase
 
-  alias TellerSandboxWeb.TransactionView
+  alias PaymentSandboxWeb.TransactionView
 
   test "get transactions" do
-    transaction_1 = TellerSandboxWeb.Factory.transaction_factory()
-    transaction_2 = TellerSandboxWeb.Factory.transaction_factory()
-    transaction_3 = TellerSandboxWeb.Factory.transaction_factory()
+    transaction_1 = PaymentSandboxWeb.Factory.transaction_factory()
+    transaction_2 = PaymentSandboxWeb.Factory.transaction_factory()
+    transaction_3 = PaymentSandboxWeb.Factory.transaction_factory()
 
     transactions = [transaction_1, transaction_2, transaction_3]
 

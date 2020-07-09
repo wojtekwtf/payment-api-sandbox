@@ -1,8 +1,8 @@
-defmodule TellerSandboxWeb.TransactionView do
-  use TellerSandboxWeb, :view
+defmodule PaymentSandboxWeb.TransactionView do
+  use PaymentSandboxWeb, :view
 
   def render("index.json", %{transactions: transactions}) do
-    render_many(transactions, TellerSandboxWeb.TransactionView, "transaction.json")
+    render_many(transactions, PaymentSandboxWeb.TransactionView, "transaction.json")
   end
 
   def render("transaction.json", %{transaction: transaction}) do

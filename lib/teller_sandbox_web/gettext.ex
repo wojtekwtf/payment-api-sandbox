@@ -1,11 +1,11 @@
-defmodule TellerSandboxWeb.Gettext do
+defmodule PaymentSandboxWeb.Gettext do
   @moduledoc """
   A module providing Internationalization with a gettext-based API.
 
   By using [Gettext](https://hexdocs.pm/gettext),
   your module gains a set of macros for translations, for example:
 
-      import TellerSandboxWeb.Gettext
+      import PaymentSandboxWeb.Gettext
 
       # Simple translation
       gettext("Here is the string to translate")
@@ -20,5 +20,5 @@ defmodule TellerSandboxWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :teller_sandbox
+  use Gettext, otp_app: :payment_sandbox
 end

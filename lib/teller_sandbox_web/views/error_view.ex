@@ -1,5 +1,5 @@
-defmodule TellerSandboxWeb.ErrorView do
-  use TellerSandboxWeb, :view
+defmodule PaymentSandboxWeb.ErrorView do
+  use PaymentSandboxWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.
@@ -12,7 +12,7 @@ defmodule TellerSandboxWeb.ErrorView do
   end
 
   def render("401.json", _assigns) do
-    %{errors: %{detail: TellerSandbox.Token.missing_token_error_message()}}
+    %{errors: %{detail: PaymentSandbox.Token.missing_token_error_message()}}
   end
 
   def template_not_found(template, _assigns) do

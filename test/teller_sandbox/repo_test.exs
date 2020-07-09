@@ -1,18 +1,18 @@
-defmodule TellerSandbox.RepoTest do
+defmodule PaymentSandbox.RepoTest do
   use ExUnit.Case
 
   test "get account by id" do
     # It's awekward to test the data like that, but I think we should do it since we expect it to be static
 
-    assert TellerSandbox.Repo.get_account_by_id("test_acc_F7lvd56V") == %TellerSandbox.Account{
+    assert PaymentSandbox.Repo.get_account_by_id("test_acc_F7lvd56V") == %PaymentSandbox.Account{
              account_number: "1234567891",
              balances: %Balance{available: 300, ledger: 300},
              currency_code: "USD",
              enrollment_id: "test_enr_2yzH_08f",
              id: "test_acc_F7lvd56V",
              institution: %Institution{
-               id: "teller_bank",
-               name: "The Teller Bank"
+               id: "payment_bank",
+               name: "The Payment Bank"
              },
              name: "Test 🦁 account",
              links: %AccountLinks{
@@ -28,7 +28,7 @@ defmodule TellerSandbox.RepoTest do
              start_date: ~D[2020-07-01]
            }
 
-    assert TellerSandbox.Repo.get_account_by_id("test_acc_G8mwe67W") == %TellerSandbox.Account{
+    assert PaymentSandbox.Repo.get_account_by_id("test_acc_G8mwe67W") == %PaymentSandbox.Account{
              account_number: "1234567892",
              balances: %Balance{available: 200, ledger: 200},
              currency_code: "USD",
@@ -52,7 +52,7 @@ defmodule TellerSandbox.RepoTest do
              start_date: ~D[2020-06-01]
            }
 
-    assert TellerSandbox.Repo.get_account_by_id("test_acc_H9nxf78X") == %TellerSandbox.Account{
+    assert PaymentSandbox.Repo.get_account_by_id("test_acc_H9nxf78X") == %PaymentSandbox.Account{
              account_number: "1234567893",
              balances: %Balance{available: 900, ledger: 900},
              currency_code: "USD",
@@ -76,7 +76,7 @@ defmodule TellerSandbox.RepoTest do
              start_date: ~D[2020-05-01]
            }
 
-    assert TellerSandbox.Repo.get_account_by_id("test_acc_I0myg89Y") == %TellerSandbox.Account{
+    assert PaymentSandbox.Repo.get_account_by_id("test_acc_I0myg89Y") == %PaymentSandbox.Account{
              account_number: "1234567894",
              balances: %Balance{available: 69500, ledger: 69500},
              currency_code: "USD",
@@ -100,7 +100,7 @@ defmodule TellerSandbox.RepoTest do
              start_date: ~D[2020-04-01]
            }
 
-    assert TellerSandbox.Repo.get_account_by_id("test_acc_J1nzh90Z") == %TellerSandbox.Account{
+    assert PaymentSandbox.Repo.get_account_by_id("test_acc_J1nzh90Z") == %PaymentSandbox.Account{
              account_number: "1234567895",
              balances: %Balance{available: 96800, ledger: 96800},
              currency_code: "USD",
@@ -126,6 +126,6 @@ defmodule TellerSandbox.RepoTest do
   end
 
   test "account not found" do
-    assert TellerSandbox.Repo.get_account_by_id("I don't exist") == nil
+    assert PaymentSandbox.Repo.get_account_by_id("I don't exist") == nil
   end
 end

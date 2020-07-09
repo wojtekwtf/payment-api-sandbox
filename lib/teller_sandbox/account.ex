@@ -7,7 +7,7 @@ defmodule Balance do
           ledger: number
         }
 
-  @spec get_account_balance(TellerSandbox.Account.t(), Date.t()) :: Balance.t()
+  @spec get_account_balance(PaymentSandbox.Account.t(), Date.t()) :: Balance.t()
   def get_account_balance(account, end_date \\ Date.utc_today()) do
     account_age_days = Date.diff(end_date, account.start_date)
 
@@ -54,17 +54,17 @@ defmodule AccountLinks do
           transactions: String.t()
         }
 
-  @spec get_account_links(TellerSandbox.Account.t()) :: AccountLinks.t()
+  @spec get_account_links(PaymentSandbox.Account.t()) :: AccountLinks.t()
   def get_account_links(account) do
     %AccountLinks{
-      self: TellerSandboxWeb.Endpoint.url() <> "/accounts/" <> account.id,
+      self: PaymentSandboxWeb.Endpoint.url() <> "/accounts/" <> account.id,
       transactions:
-        TellerSandboxWeb.Endpoint.url() <> "/accounts/" <> account.id <> "/transactions"
+        PaymentSandboxWeb.Endpoint.url() <> "/accounts/" <> account.id <> "/transactions"
     }
   end
 end
 
-defmodule TellerSandbox.Account do
+defmodule PaymentSandbox.Account do
   @derive {Jason.Encoder,
            only: [
              :account_number,
@@ -93,7 +93,7 @@ defmodule TellerSandbox.Account do
     :start_date
   ]
 
-  @type t :: %TellerSandbox.Account{
+  @type t :: %PaymentSandbox.Account{
           account_number: String.t(),
           balances: Balance.t() | nil,
           currency_code: String.t(),
@@ -108,12 +108,12 @@ defmodule TellerSandbox.Account do
           start_date: Date.t()
         }
 
-  @spec set_account_balance(TellerSandbox.Account.t(), Date.t()) :: TellerSandbox.Account.t()
+  @spec set_account_balance(PaymentSandbox.Account.t(), Date.t()) :: PaymentSandbox.Account.t()
   def set_account_balance(account, end_date \\ Date.utc_today()) do
     %{account | balances: Balance.get_account_balance(account, end_date)}
   end
 
-  @spec set_links(TellerSandbox.Account.t()) :: TellerSandbox.Account.t()
+  @spec set_links(PaymentSandbox.Account.t()) :: PaymentSandbox.Account.t()
   def set_links(account) do
     %{account | links: AccountLinks.get_account_links(account)}
   end

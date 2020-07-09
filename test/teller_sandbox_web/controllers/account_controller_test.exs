@@ -1,5 +1,5 @@
-defmodule TellerSandboxWeb.AccountControllerTest do
-  use TellerSandboxWeb.ConnCase
+defmodule PaymentSandboxWeb.AccountControllerTest do
+  use PaymentSandboxWeb.ConnCase
 
   setup %{conn: conn} do
     conn = put_req_header(conn, "authorization", "test_AgBfBU-Ph-NciDT2Hekssaf")
