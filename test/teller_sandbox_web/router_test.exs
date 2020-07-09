@@ -6,7 +6,7 @@ defmodule TellerSandboxWeb.RouterTest do
 
     response_data = json_response(conn, 403)
 
-    assert response_data["error_message"] == "You need an authorization token to run this request"
+    assert response_data["error_message"] == TellerSandbox.Token.missing_token_error_message()
   end
 
   test "get single account without the token", %{conn: conn} do
@@ -14,7 +14,7 @@ defmodule TellerSandboxWeb.RouterTest do
 
     response_data = json_response(conn, 403)
 
-    assert response_data["error_message"] == "You need an authorization token to run this request"
+    assert response_data["error_message"] == TellerSandbox.Token.missing_token_error_message()
   end
 
   test "get account transactions without the token", %{conn: conn} do
@@ -22,6 +22,6 @@ defmodule TellerSandboxWeb.RouterTest do
 
     response_data = json_response(conn, 403)
 
-    assert response_data["error_message"] == "You need an authorization token to run this request"
+    assert response_data["error_message"] == TellerSandbox.Token.missing_token_error_message()
   end
 end

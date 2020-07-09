@@ -56,7 +56,9 @@ defmodule TellerSandboxWeb.Router do
     conn
     |> Plug.Conn.resp(
       403,
-      Jason.encode!(%{error_message: "You need an authorization token to run this request"})
+      Jason.encode!(%{
+        error_message: TellerSandbox.Token.missing_token_error_message()
+      })
     )
     |> Plug.Conn.put_resp_header("content-type", "application/json")
     |> Plug.Conn.send_resp()

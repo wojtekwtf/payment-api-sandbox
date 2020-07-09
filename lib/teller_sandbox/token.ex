@@ -6,6 +6,14 @@ defmodule TellerSandbox.Token do
           token: String.t()
         }
 
+  @spec missing_token_error_message :: String.t()
+  def missing_token_error_message do
+    token_url = TellerSandboxWeb.Endpoint.url() <> "/token"
+
+    "You need an authorization token to run this request. Get yours at " <>
+      token_url <> " and put it in the authorization header"
+  end
+
   @spec generate_api_token :: TellerSandbox.Token.t()
   def generate_api_token do
     %TellerSandbox.Token{
