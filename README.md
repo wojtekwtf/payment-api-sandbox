@@ -54,6 +54,7 @@ You can obtain it with the `GET /token` endpoint.
 - Start Phoenix server with `mix phx.server`
 ### Tests
 - Run tests `mix test`
+- Run tests with coverage report (91.1%) `mix test --cover`
 ### Dialyzer
 - Run dialyzer (static analysis tool) with `mix dialyzer` 
 
@@ -63,6 +64,8 @@ The project is not production ready. If I had more time to work on it, I would a
 2. OpenAPI docs
 3. Real authentication
 4. Database with some dummy data
+5. 100% test coverage 😳
+6. Real /transactions/:id endpoint
 
 
 ## Summary
