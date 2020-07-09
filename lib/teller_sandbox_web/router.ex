@@ -6,15 +6,16 @@ defmodule TellerSandboxWeb.Router do
     plug :validate_test_token_header
   end
 
-  scope "/api", TellerSandboxWeb do
+  scope "/", TellerSandboxWeb do
     pipe_through :api
 
     resources "/accounts", AccountController, only: [:index, :show]
     resources "/accounts/:account_id/transactions", TransactionController, only: [:index, :show]
   end
 
-  scope "/token", TellerSandboxWeb do
-    get "/", TokenController, :index
+  scope "/", TellerSandboxWeb do
+    # doesn't check the token
+    get "/token", TokenController, :index
   end
 
   # Enables LiveDashboard only for development
