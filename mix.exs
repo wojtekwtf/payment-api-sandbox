@@ -11,7 +11,14 @@ defmodule TellerSandbox.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      dialyzer: [plt_add_deps: :transitive]
+      dialyzer: [plt_add_deps: :transitive],
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -41,7 +48,8 @@ defmodule TellerSandbox.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:dialyxir, "~> 0.5.0", only: [:dev], runtime: false}
+      {:dialyxir, "~> 0.5.0", only: [:dev], runtime: false},
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 
