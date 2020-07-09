@@ -41,27 +41,22 @@ defmodule TellerSandboxWeb.Router do
 
   defp validate_token_characters(conn, []) do
     # Matches if there is no authorization header
-    send_403_forbidden_http_response(conn)
+    send_401_unauthorized_http_response(conn)
   end
 
   defp validate_token_characters(conn, [token]) do
     if !String.match?(token, ~r/^test_.{23}$/) do
-      send_403_forbidden_http_response(conn)
+      send_401_unauthorized_http_response(conn)
     else
       conn
     end
   end
 
-  defp send_403_forbidden_http_response(conn) do
+  defp send_401_unauthorized_http_response(conn) do
     conn
-    |> Plug.Conn.resp(
-      403,
-      Jason.encode!(%{
-        error_message: TellerSandbox.Token.missing_token_error_message()
-      })
-    )
-    |> Plug.Conn.put_resp_header("content-type", "application/json")
-    |> Plug.Conn.send_resp()
-    |> Plug.Conn.halt()
+    |> put_status(:unauthorized)
+    |> put_view(TellerSandboxWeb.ErrorView)
+    |> render(:"401")
+    |> halt
   end
 end

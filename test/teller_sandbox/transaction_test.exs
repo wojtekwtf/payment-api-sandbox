@@ -33,10 +33,9 @@ defmodule TellerSanbox.TransactionTest do
     links = TransactionLinks.get_transaction_links(transaction)
 
     assert links.self ==
-             TellerSandboxWeb.Endpoint.url() <>
-               "/api/accounts/test_acc_11111111/transactions/test_txn_12345678"
+             "http://localhost:4002/accounts/test_acc_11111111/transactions/test_txn_12345678"
 
-    assert links.account == TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111"
+    assert links.account == "http://localhost:4002/accounts/test_acc_11111111"
   end
 
   test "set transaction links" do
@@ -45,10 +44,8 @@ defmodule TellerSanbox.TransactionTest do
       |> TellerSandbox.Transaction.set_links()
 
     assert transaction.links.self ==
-             TellerSandboxWeb.Endpoint.url() <>
-               "/api/accounts/test_acc_11111111/transactions/test_txn_12345678"
+             "http://localhost:4002/accounts/test_acc_11111111/transactions/test_txn_12345678"
 
-    assert transaction.links.account ==
-             TellerSandboxWeb.Endpoint.url() <> "/api/accounts/test_acc_11111111"
+    assert transaction.links.account == "http://localhost:4002/accounts/test_acc_11111111"
   end
 end

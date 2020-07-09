@@ -57,9 +57,9 @@ defmodule AccountLinks do
   @spec get_account_links(TellerSandbox.Account.t()) :: AccountLinks.t()
   def get_account_links(account) do
     %AccountLinks{
-      self: TellerSandboxWeb.Endpoint.url() <> "/api/accounts/" <> account.id,
+      self: TellerSandboxWeb.Endpoint.url() <> "/accounts/" <> account.id,
       transactions:
-        TellerSandboxWeb.Endpoint.url() <> "/api/accounts/" <> account.id <> "/transactions"
+        TellerSandboxWeb.Endpoint.url() <> "/accounts/" <> account.id <> "/transactions"
     }
   end
 end

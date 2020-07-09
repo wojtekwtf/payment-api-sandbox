@@ -8,6 +8,14 @@ defmodule TellerSandboxWeb.AccountController do
 
   def show(conn, %{"id" => account_id}) do
     account = TellerSandbox.Repo.get_account_by_id(account_id)
-    render(conn, "account.json", %{account: account})
+
+    if account == nil do
+      conn
+      |> put_status(:not_found)
+      |> put_view(TellerSandboxWeb.ErrorView)
+      |> render(:"404")
+    else
+      render(conn, "account.json", %{account: account})
+    end
   end
 end

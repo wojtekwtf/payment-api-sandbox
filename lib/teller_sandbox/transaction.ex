@@ -12,8 +12,8 @@ defmodule TransactionLinks do
     %TransactionLinks{
       self:
         TellerSandboxWeb.Endpoint.url() <>
-          "/api/accounts/" <> transaction.account_id <> "/transactions/" <> transaction.id,
-      account: TellerSandboxWeb.Endpoint.url() <> "/api/accounts/" <> transaction.account_id
+          "/accounts/" <> transaction.account_id <> "/transactions/" <> transaction.id,
+      account: TellerSandboxWeb.Endpoint.url() <> "/accounts/" <> transaction.account_id
     }
   end
 end
@@ -42,11 +42,15 @@ defmodule TellerSandbox.Transaction do
 
   @spec generate_transactions(TellerSandbox.Account.t()) :: [TellerSandbox.Transaction.t()]
   def generate_transactions(account) do
-    days_since_start = Date.diff(Date.utc_today(), account.start_date)
+    if account == nil do
+      []
+    else
+      days_since_start = Date.diff(Date.utc_today(), account.start_date)
 
-    1..days_since_start
-    |> Enum.map(fn day -> create_transaction(day, account) end)
-    |> Enum.map(fn transaction -> set_links(transaction) end)
+      1..days_since_start
+      |> Enum.map(fn day -> create_transaction(day, account) end)
+      |> Enum.map(fn transaction -> set_links(transaction) end)
+    end
   end
 
   @spec create_transaction(number(), TellerSandbox.Account.t()) :: TellerSandbox.Transaction.t()

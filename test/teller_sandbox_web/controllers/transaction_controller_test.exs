@@ -20,6 +20,13 @@ defmodule TellerSandboxWeb.TransactionControllerTest do
     Enum.map(response_data, fn object -> validate_transaction_fields(object) end)
   end
 
+  test "get account transactions bad id", %{conn: conn} do
+    conn = get(conn, Routes.transaction_path(conn, :index, "I don't exist"))
+
+    response_data = json_response(conn, 404)
+    assert response_data["errors"]["detail"] == "Not Found"
+  end
+
   def validate_transaction_fields(object) do
     assert String.length(object["type"]) > 0
     assert String.match?(object["id"], ~r/^test_txn_.{8}$/)

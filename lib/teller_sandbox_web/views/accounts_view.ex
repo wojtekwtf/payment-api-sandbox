@@ -5,6 +5,10 @@ defmodule TellerSandboxWeb.AccountView do
     render_many(accounts, TellerSandboxWeb.AccountView, "account.json")
   end
 
+  def render("account.json", %{account: nil}) do
+    TellerSandboxWeb.ErrorView.render("404.json")
+  end
+
   def render("account.json", %{account: account}) do
     account
   end
